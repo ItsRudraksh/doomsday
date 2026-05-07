@@ -80,8 +80,8 @@ Zero build step. Zero dependencies. Open `index.html` and it runs.
 ## 🚀 Running Locally
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/marvel-doomsday.git
-cd marvel-doomsday
+git clone https://github.com/YOUR_USERNAME/doomsday.git
+cd doomsday
 # Open index.html in any browser — no server needed
 ```
 
@@ -96,7 +96,7 @@ npx serve .
 ## 📁 Structure
 
 ```
-marvel-doomsday/
+doomsday/
 ├── index.html        # Full page structure + splash overlay
 ├── styles.css        # ~1700 lines — design system, animations, HUD styles
 ├── app.js            # ~1500 lines — all canvas engines + game logic
