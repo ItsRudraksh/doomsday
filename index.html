@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Road to Avengers: Doomsday — The Multiverse Watch Order</title>
+  <meta name="description" content="The definitive chronological watch order for every MCU, X-Men, Sony, and Disney+ Marvel title before Avengers: Doomsday — December 18, 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== JARVIS SPLASH ===== -->
+  <div id="jarvis-splash" role="dialog" aria-modal="true" aria-label="JARVIS System Boot">
+    <canvas id="jv-canvas"></canvas>
+    <div class="jv-corner jv-tl"></div>
+    <div class="jv-corner jv-tr"></div>
+    <div class="jv-corner jv-bl"></div>
+    <div class="jv-corner jv-br"></div>
+    <div class="jv-panel jv-panel--l" id="jv-pl"></div>
+    <div class="jv-panel jv-panel--r" id="jv-pr"></div>
+    <div class="jv-scan"></div>
+    <div class="jv-center">
+      <div class="jv-label">J . A . R . V . I . S &nbsp;·&nbsp; F R I D A Y &nbsp;v 8 . 2</div>
+      <pre class="jv-ascii" id="jv-ascii"></pre>
+      <div class="jv-terminal" id="jv-terminal"></div>
+      <div class="jv-reveal" id="jv-reveal">
+        <div class="jv-reveal__main">DOOMSDAY PROTOCOL</div>
+        <div class="jv-reveal__sub">WATCH ORDER INITIALIZED &nbsp;·&nbsp; 94 TITLES &nbsp;·&nbsp; DEC 18 2026</div>
+      </div>
+    </div>
+    <div class="jv-status">
+      <span class="jv-status__dot"></span>
+      <span id="jv-status-txt">SYSTEM BOOT</span>
+    </div>
+    <div class="jv-skip" id="jv-skip">[ CLICK ANYWHERE TO SKIP ]</div>
+  </div>
+
+  <!-- Atmospheric layers -->
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atmosphere__grain"></div>
+    <div class="atmosphere__cracks"></div>
+    <canvas id="void-canvas"></canvas>
+  </div>
+
+  <!-- Thor lightning overlay -->
+  <canvas id="lightning-canvas" aria-hidden="true"></canvas>
+  <div class="lightning-flash" id="lightning-flash" aria-hidden="true"></div>
+
+  <!-- Strange portal canvas -->
+  <canvas id="portal-canvas" aria-hidden="true"></canvas>
+
+  <!-- Snap celebration -->
+  <div id="snap-celebration" role="dialog" aria-modal="true" aria-label="All titles watched!">
+    <canvas id="celebration-canvas" style="position:absolute;inset:0;pointer-events:none;"></canvas>
+    <div class="snap-celebration__title">THE INFINITY GAUNTLET IS COMPLETE</div>
+    <p class="snap-celebration__sub">ALL 94 TITLES WATCHED · THE SNAP IS INEVITABLE</p>
+    <button class="snap-celebration__close" id="celebration-close">DISMISS</button>
+  </div>
+
+  <!-- Infinity Gauntlet Tracker -->
+  <div class="gauntlet-tracker" id="gauntlet-tracker" aria-label="Watch progress">
+    <span class="gauntlet-tracker__label">GAUNTLET</span>
+    <div class="gauntlet" id="gauntlet">
+      <div class="stone stone--power"   data-phase="fox"         data-name="POWER STONE"><div class="stone__fill" id="st-fox"></div></div>
+      <div class="stone stone--space"   data-phase="sony-legacy" data-name="SPACE STONE"><div class="stone__fill" id="st-sony-legacy"></div></div>
+      <div class="stone stone--reality" data-phase="infinity"    data-name="REALITY STONE"><div class="stone__fill" id="st-infinity"></div></div>
+      <div class="stone stone--soul"    data-phase="defenders"   data-name="SOUL STONE"><div class="stone__fill" id="st-defenders"></div></div>
+      <div class="stone stone--time"    data-phase="multiverse"  data-name="TIME STONE"><div class="stone__fill" id="st-multiverse"></div></div>
+      <div class="stone stone--mind"    data-phase="phase56"     data-name="MIND STONE"><div class="stone__fill" id="st-phase56"></div></div>
+    </div>
+    <span class="gauntlet-tracker__stat" id="gauntlet-stat">0 / 94</span>
+  </div>
+
+  <!-- ===== HERO: THE PORTAL ===== -->
+  <header id="hero" class="hero">
+    <div class="portal" aria-hidden="true">
+      <div class="portal__ring portal__ring--1"></div>
+      <div class="portal__ring portal__ring--2"></div>
+      <div class="portal__ring portal__ring--3"></div>
+      <div class="portal__ring portal__ring--4"></div>
+    </div>
+
+    <div class="hero__content">
+      <div class="hero__badge">PHASE 6 · THE FINAL CONVERGENCE</div>
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__title-top">THE ROAD TO</span>
+        <span class="hero__title-main" id="hero-title-main">DOOMSDAY</span>
+      </h1>
+      <p class="hero__tagline">94 titles across every universe.<br/>One timeline. One destiny. No escape.</p>
+
+      <!-- Doom Clock -->
+      <div class="doom-clock" id="doom-clock" aria-label="Countdown to Doomsday">
+        <svg class="doom-clock__svg" viewBox="0 0 200 200" aria-hidden="true">
+          <!-- Track rings -->
+          <circle cx="100" cy="100" r="88" class="clock-ring-bg"/>
+          <circle cx="100" cy="100" r="72" class="clock-ring-bg"/>
+          <circle cx="100" cy="100" r="56" class="clock-ring-bg"/>
+          <circle cx="100" cy="100" r="40" class="clock-ring-bg"/>
+          <!-- Progress arcs — stroke-dasharray/offset set by JS -->
+          <circle cx="100" cy="100" r="88" class="clock-arc arc-days"  id="arc-days"/>
+          <circle cx="100" cy="100" r="72" class="clock-arc arc-hours" id="arc-hours"/>
+          <circle cx="100" cy="100" r="56" class="clock-arc arc-mins"  id="arc-mins"/>
+          <circle cx="100" cy="100" r="40" class="clock-arc arc-secs"  id="arc-secs"/>
+        </svg>
+        <div class="doom-clock__center">
+          <div class="doom-clock__primary" id="cd-days">224</div>
+          <div class="doom-clock__unit-label">DAYS</div>
+          <div class="doom-clock__secondary">
+            <span id="cd-hours">00</span>:<span id="cd-mins">00</span>:<span id="cd-secs">00</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#phase-fox" class="hero__enter" id="enter-btn">
+        ENTER THE MULTIVERSE
+        <svg class="hero__enter-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== STICKY TRACKER ===== -->
+  <div class="tracker" id="tracker">
+    <div class="tracker__bar"><div class="tracker__fill" id="tracker-fill"></div></div>
+    <div class="tracker__info">
+      <span class="tracker__stat" id="tracker-stat">0 / 94</span>
+      <span class="tracker__pct" id="tracker-pct">0%</span>
+    </div>
+  </div>
+
+  <!-- ===== CONTROLS ===== -->
+  <div class="controls" id="controls">
+    <div class="controls__search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="controls__search-ico"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="search" id="search" class="controls__search" placeholder="Find a title..." aria-label="Search titles" />
+    </div>
+    <div class="controls__filters" id="filter-bar" role="tablist">
+      <button class="pill active" data-filter="all" role="tab" aria-selected="true" id="pill-all">ALL</button>
+      <button class="pill" data-filter="fox" role="tab" id="pill-fox">🦊 X-MEN</button>
+      <button class="pill" data-filter="sony-legacy" role="tab" id="pill-sony">🕷️ SPIDER-MEN</button>
+      <button class="pill" data-filter="infinity" role="tab" id="pill-inf">∞ INFINITY</button>
+      <button class="pill" data-filter="defenders" role="tab" id="pill-def">📺 DEFENDERS</button>
+      <button class="pill" data-filter="multiverse" role="tab" id="pill-multi">🌀 MULTIVERSE</button>
+      <button class="pill" data-filter="sony-verse" role="tab" id="pill-sv">🕸️ SONY VERSE</button>
+      <button class="pill" data-filter="phase56" role="tab" id="pill-p56">⚡ PHASE 5-6</button>
+      <button class="pill" data-filter="2026" role="tab" id="pill-26">🔥 2026</button>
+    </div>
+    <div class="controls__actions">
+      <button class="ctrl-btn ctrl-btn--all" id="btn-mark-all" aria-label="Mark all titles as watched">✓ ALL DONE</button>
+      <button class="ctrl-btn ctrl-btn--reset" id="btn-reset" aria-label="Reset all watched titles">↺ RESET</button>
+    </div>
+  </div>
+
+  <!-- ===== TIMELINE ===== -->
+  <main class="tl" id="timeline">
+    <div class="tl__spine" aria-hidden="true"></div>
+    <!-- Each phase is injected by JS into here -->
+  </main>
+
+  <!-- ===== DOOMSDAY TERMINUS ===== -->
+  <section class="terminus" id="terminus">
+    <div class="terminus__fracture" aria-hidden="true"></div>
+    <div class="terminus__inner">
+      <div class="terminus__num">#95</div>
+      <h2 class="terminus__title glitch" data-text="AVENGERS: DOOMSDAY">AVENGERS: DOOMSDAY</h2>
+      <div class="terminus__date">DECEMBER 18, 2026</div>
+      <div class="terminus__quote">"Everything has led to this."</div>
+    </div>
+  </section>
+
+  <!-- ===== MINIGAME ===== -->
+  <section class="minigame" id="minigame" aria-label="Infinity Trial minigame">
+    <div class="minigame__header">
+      <div class="minigame__badge">SIDE QUEST</div>
+      <h2 class="minigame__title">INFINITY TRIAL</h2>
+      <p class="minigame__sub">Collect all 6 stones before the Outriders take you down. Move your cursor.</p>
+    </div>
+    <div class="minigame__arena">
+      <canvas id="game-canvas" aria-label="Infinity Trial game arena"></canvas>
+    </div>
+    <div class="minigame__scores">
+      <span class="minigame__score-label">BEST TIME</span>
+      <span class="minigame__score-val" id="best-time">—</span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Built for the obsessed. Data from official Marvel Studios.</p>
+    <p class="foot__copy">THE ROAD TO DOOMSDAY © 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
