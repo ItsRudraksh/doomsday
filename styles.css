@@ -1840,3 +1840,135 @@ input { font-family: inherit; border: none; outline: none; background: none; col
   opacity: 0;
 }
 @keyframes jvFadeSkip { to { opacity: 1; } }
+
+/* ============================================================
+   RESPONSIVE — Tablet  ≤ 900px
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Hero */
+  .hero { min-height: 80vh; }
+  .hero__title-main { white-space: normal; text-align: center; }
+
+  /* Doom clock slightly smaller */
+  .doom-clock__svg { width: clamp(150px, 36vw, 200px); height: clamp(150px, 36vw, 200px); }
+
+  /* Controls: wrap more gracefully */
+  .controls { padding: 0.6rem 1rem; gap: 0.5rem; }
+  .controls__search-box { flex: 0 1 220px; }
+  .controls__actions { margin-left: 0; }
+
+  /* Timeline: spine to left, all cards right */
+  .tl { padding: 3rem 1rem 5rem; }
+  .tl__spine { left: 24px; }
+  .card { width: calc(100% - 54px); margin-left: 54px !important; margin-right: 0 !important; }
+  .card:nth-child(odd), .card:nth-child(even) {
+    align-self: stretch;
+    transform: translateX(20px) translateY(10px);
+  }
+  .card.revealed { transform: translateX(0) translateY(0) !important; }
+  .card:nth-child(odd):hover, .card:nth-child(even):hover { transform: translateY(-3px) translateX(2px); }
+  .card::before { left: -26px !important; right: auto !important; }
+  .card::after  { left: -22px !important; right: auto !important; width: 20px !important;
+                  background: linear-gradient(90deg, var(--purple-g), transparent) !important; }
+
+  /* JARVIS splash panels hide */
+  .jv-panel { display: none; }
+  .jv-center { padding: 0 40px; }
+
+  /* Minigame */
+  .minigame { padding: 3rem 1rem; }
+}
+
+/* ============================================================
+   RESPONSIVE — Large phone  ≤ 640px
+   ============================================================ */
+@media (max-width: 640px) {
+  /* Hero */
+  .hero { min-height: 100svh; }
+  .hero__content { gap: 1rem; padding: 1.2rem; }
+  .hero__badge { font-size: 0.52rem; letter-spacing: 0.28em; padding: 0.3rem 0.8rem; }
+  .hero__tagline { font-size: 0.82rem; max-width: 28ch; }
+
+  /* Doom clock */
+  .doom-clock__svg { width: clamp(130px, 50vw, 170px); height: clamp(130px, 50vw, 170px); }
+
+  /* Tracker */
+  .tracker { padding: 0.4rem 1rem; }
+  .tracker__bar { height: 3px; }
+  .tracker__stat, .tracker__pct { font-size: 0.55rem; }
+
+  /* Stones row — smaller */
+  .tracker__stones { gap: 6px; }
+  .tracker__stone { width: 16px; height: 16px; }
+
+  /* Controls — stack vertically */
+  .controls { flex-direction: column; align-items: stretch; padding: 0.6rem 0.8rem; gap: 0.5rem; }
+  .controls__search-box { flex: 1; }
+  .controls__filters { justify-content: flex-start; gap: 4px; }
+  .controls__actions { display: flex; gap: 6px; }
+  .ctrl-btn { flex: 1; text-align: center; padding: 0.4rem 0.6rem; }
+
+  /* Phase headers */
+  .phase-block { margin-bottom: 3.5rem; }
+  .phase-block__header { margin-bottom: 1.5rem; }
+  .phase-block__icon { font-size: 1.5rem; }
+  .phase-block__title { font-size: clamp(1.1rem, 5vw, 1.6rem); }
+
+  /* Cards — full width single col */
+  .tl { padding: 2rem 0.75rem 4rem; }
+  .tl__spine { left: 14px; }
+  .card { width: calc(100% - 36px); margin-left: 36px !important; padding: 0.85rem 1rem; gap: 0.6rem; }
+  .card::before { left: -18px !important; width: 6px; height: 6px; }
+  .card::after  { left: -14px !important; width: 12px !important; }
+
+  /* Card internals */
+  .card__name { font-size: 0.82rem; }
+  .card__check { width: 18px; height: 18px; font-size: 0.6rem; }
+
+  /* Terminus */
+  .terminus { padding: 4rem 1.5rem; }
+  .terminus__title { font-size: clamp(1.4rem, 7vw, 2.5rem); letter-spacing: 0.08em; }
+  .terminus__quote { font-size: 0.8rem; }
+
+  /* Minigame */
+  .minigame { padding: 2rem 0.75rem; }
+  .minigame__title { font-size: clamp(1.4rem, 6vw, 2.2rem); }
+  .minigame__sub { font-size: 0.7rem; }
+
+  /* Footer */
+  .foot { padding: 2rem 1rem; font-size: 0.7rem; }
+
+  /* JARVIS splash */
+  .jv-center { padding: 0 16px; gap: 0.6rem; }
+  .jv-ascii  { font-size: clamp(0.28rem, 1.8vw, 0.42rem); min-height: 80px; }
+  .jv-terminal { font-size: 0.54rem; min-height: 120px; max-width: 100%; }
+  .jv-reveal__main { font-size: clamp(1.4rem, 8vw, 2.5rem); letter-spacing: 0.1em; }
+  .jv-reveal__sub  { font-size: 0.5rem; letter-spacing: 0.1em; }
+  .jv-corner { width: 35px; height: 35px; }
+  .jv-tl { top: 14px; left: 14px; } .jv-tr { top: 14px; right: 14px; }
+  .jv-bl { bottom: 14px; left: 14px; } .jv-br { bottom: 14px; right: 14px; }
+}
+
+/* ============================================================
+   RESPONSIVE — Small phone  ≤ 420px
+   ============================================================ */
+@media (max-width: 420px) {
+  .hero__title-main { font-size: clamp(2.8rem, 15vw, 4rem); }
+
+  /* Hide spine entirely */
+  .tl__spine { display: none; }
+  .card { width: 100% !important; margin-left: 0 !important; }
+  .card::before, .card::after { display: none; }
+
+  /* Pill filters — 2-per-row grid */
+  .controls__filters { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .pill { text-align: center; }
+
+  /* Doom clock — even smaller */
+  .doom-clock__svg { width: 120px; height: 120px; }
+
+  /* JARVIS ascii — minimal */
+  .jv-ascii { font-size: 0.24rem; min-height: 60px; }
+  .jv-label { font-size: 0.42rem; letter-spacing: 0.18em; }
+  .jv-terminal { font-size: 0.48rem; }
+}
