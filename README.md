@@ -4,7 +4,7 @@
 
 A cinematic, maximalist Marvel watch order tracker built for the obsessed — packed with JARVIS-style HUD effects, canvas animations, and a fully playable minigame. All in vanilla HTML, CSS, and JavaScript.
 
-**Live at →** _[your GitHub Pages URL here]_
+**Live at →** [https://itsrudraksh.github.io/doomsday/](https://itsrudraksh.github.io/doomsday/)
 
 ---
 
