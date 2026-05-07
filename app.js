@@ -295,22 +295,7 @@ function buildTimeline() {
   });
 }
 
-// ─── Progress ───
-function refreshProgress() {
-  const n = watched.size;
-  const pct = Math.round((n / TOTAL) * 100);
-  document.getElementById("tracker-fill").style.width = pct + "%";
-  document.getElementById("tracker-stat").textContent = `${n} / ${TOTAL}`;
-  document.getElementById("tracker-pct").textContent = pct + "%";
-
-  // Phase counters
-  Object.entries(WATCH_DATA).forEach(([phase, data]) => {
-    const el = document.getElementById("cnt-" + phase);
-    if (!el) return;
-    const done = data.items.filter(i => watched.has(i.num)).length;
-    el.textContent = `${done}/${data.items.length}`;
-  });
-}
+// ─── Progress — proxied to the real gauntlet-aware refreshProgress below ───
 
 // ─── Search ───
 function initSearch() {
@@ -352,18 +337,15 @@ function initBulkActions() {
   }
 
   btnAll.addEventListener('click', () => {
-    // Mark every title watched
     Object.values(WATCH_DATA).forEach(phase =>
       phase.items.forEach(item => watched.add(item.num))
     );
     save();
-    // Update all card visuals
+    // dataset.num is the key — set by buildTimeline
     document.querySelectorAll('.card').forEach(card => {
-      const id = parseInt(card.dataset.id);
-      if (!isNaN(id)) {
+      const num = parseInt(card.dataset.num);
+      if (!isNaN(num) && watched.has(num)) {
         card.classList.add('watched');
-        const cb = card.querySelector('.card__check');
-        if (cb) cb.checked = true;
       }
     });
     refreshProgress();
@@ -375,8 +357,6 @@ function initBulkActions() {
     save();
     document.querySelectorAll('.card').forEach(card => {
       card.classList.remove('watched');
-      const cb = card.querySelector('.card__check');
-      if (cb) cb.checked = false;
     });
     refreshProgress();
     flash(btnReset, 'RESET ✓');
@@ -654,16 +634,18 @@ function toggleWatchedWithSnap(num, card) {
     watched.delete(num);
     card.classList.remove('watched');
     snapAssemble(card);
+    save();
+    refreshProgress();
   } else {
-    // Watch: snap to dust then fade to watched
+    // Watch: snap to dust then mark watched — progress updates AFTER state applied
     snapDisintegrate(card, () => {
       watched.add(num);
       card.classList.add('watched');
       snapAssemble(card);
+      save();
+      refreshProgress();
     });
   }
-  save();
-  refreshProgress();
 }
 
 // ─── Infinity Gauntlet Tracker ───
